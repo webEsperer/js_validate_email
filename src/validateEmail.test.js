@@ -45,4 +45,20 @@ describe(`Function 'validateEmail':`, () => {
   it(`should return false for missing domain extension`, () => {
     expect(validateEmail('test@mail')).toBe(false);
   });
+
+  it(`should return false when email contains more than one @`, () => {
+    expect(validateEmail('a@b@c.com')).toBe(false);
+  });
+
+  it(`should allow underscore in personal part`, () => {
+    expect(validateEmail('user_name@mail.com')).toBe(true);
+  });
+
+  it(`should allow digits and hyphens in domain`, () => {
+    expect(validateEmail('test@mail1-domain.com')).toBe(true);
+  });
+
+  it(`should return false when forbidden characters like + are used`, () => {
+    expect(validateEmail('test+plus@mail.com')).toBe(false);
+  });
 });
