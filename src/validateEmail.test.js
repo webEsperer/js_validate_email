@@ -46,6 +46,14 @@ describe(`Function 'validateEmail':`, () => {
     expect(validateEmail('test@mail')).toBe(false);
   });
 
+  it(`should return false when local part is missing`, () => {
+    expect(validateEmail('@domain.com')).toBe(false);
+  });
+
+  it(`should return false when domain part is missing`, () => {
+    expect(validateEmail('user@')).toBe(false);
+  });
+
   it(`should return false when email contains more than one @`, () => {
     expect(validateEmail('a@b@c.com')).toBe(false);
   });
